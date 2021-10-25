@@ -21,6 +21,7 @@
     - install
     - ssh
 - name: debug
+  become_user: "{{ lookup('env', 'USER') }}"
   command: "cat {{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub"
   register: key
 - name: Set authorized key took from file
