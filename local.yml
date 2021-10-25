@@ -7,6 +7,8 @@
     - name: update repositories
       apt: update_cache=yes
       changed_when: False
+    - name: check user
+      command: "echo {{ lookup('env', 'USER' }}"
   tasks:
     - include: tasks/ssh.yml
     - include: tasks/core-setup.yml
