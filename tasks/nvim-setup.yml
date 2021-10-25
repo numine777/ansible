@@ -1,0 +1,45 @@
+- name: Clone Neovim
+  ansible.builtin.git:
+    repo: 'https://github.com/neovim/neovim.git'
+    dest: "{{ lookup('env', 'HOME') }}/neovim"
+  tags:
+    - install
+    - neovim
+- name: Build neovim
+  shell: "cd {{ lookup('env', 'HOME') }}/neovim && make"
+  tags:
+    - install
+    - neovim
+- name: Install neovim
+  shell: "cd {{ lookup('env', 'HOME') }}/neovim && make install"
+  tags:
+    - install
+    - neovim
+- name: Neovim Plugin Development 1
+  apt: name=luarocks
+  tags:
+    - install
+    - neovim
+- name: Neovim Plugin Development 2 luacheck
+  shell: luarocks install luacheck
+  tags:
+    - install
+    - neovim
+- name: Install Packer.nvim
+  shell: "git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim"
+  tags:
+    - install
+    - dotfiles
+    - neovim
+- name: Compile vim Plugins
+  shell: nvim +PackerCompile +qall +silent
+  tags:
+    - install
+    - dotfiles
+    - neovim
+- name: Install vim Plugins
+  shell: nvim +PackerInstall +qall +silent
+  tags:
+    - install
+    - dotfiles
+    - neovim
