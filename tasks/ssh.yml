@@ -18,6 +18,9 @@
     - dotfiles
     - install
     - ssh
+- name: debugh
+  command: "cat {{ lookup('env', 'USER') }}/.ssh/id_rsa.pub"
+  register: key
 - name: Set authorized key took from file
   authorized_key:
     user: "{{ lookup('env', 'USER') }}"
