@@ -18,8 +18,8 @@
     - dotfiles
     - install
     - ssh
-- name: debugh
-  command: "cat {{ lookup('env', 'USER') }}/.ssh/id_rsa.pub"
+- name: debug
+  command: "cat {{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub"
   register: key
 - name: Set authorized key took from file
   authorized_key:
