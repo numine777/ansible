@@ -20,10 +20,10 @@
     - ssh
 - name: debug
   become_user: "scott"
-  command: "cat {{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub"
+  command: "cat {{ home_dir }}/.ssh/id_rsa.pub"
   register: key
 - name: Set authorized key took from file
   authorized_key:
-    user: "{{ lookup('env', 'USER') }}"
+    user: "{{ user_id }}"
     state: present
-    key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub"
+    key: "{{ home_dir }}/.ssh/id_rsa.pub"

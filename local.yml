@@ -2,13 +2,13 @@
   become: true
   vars:
     source_key: "./.ssh/id_rsa"
-    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
+    home_dir: "{{ lookup('env', 'HOME') }}"
+    user_id: "{{ lookup('env', 'USER') }}"
+    dest_key: "{{ home_dir }}/.ssh/id_rsa"
   pre_tasks:
     - name: update repositories
       apt: update_cache=yes
       changed_when: False
-    - name: check user
-      command: "echo {{ lookup('env', 'USER') }} is here"
   tasks:
     - include: tasks/ssh.yml
     - include: tasks/core-setup.yml

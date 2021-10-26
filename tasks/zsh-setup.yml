@@ -13,6 +13,7 @@
     - productivity
     - zsh
 - name: Oh-My-Zsh
+  become: no
   shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
   tags:
     - install
@@ -22,7 +23,7 @@
 - name: Install zsh-autosuggestions
   ansible.builtin.git:
     repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
-    dest: "/home/scott/.oh-my-zsh/plugins/zsh-autosuggestions"
+    dest: "{{ home_dir }}/.oh-my-zsh/plugins/zsh-autosuggestions"
   tags:
     - install
     - productivity
