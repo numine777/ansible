@@ -18,10 +18,6 @@
     - dotfiles
     - install
     - ssh
-- name: debug
-  become_user: "scott"
-  command: "cat {{ home_dir }}/.ssh/id_rsa.pub"
-  register: key
 - name: Set authorized key took from file
   become: no
   authorized_key:
