@@ -23,4 +23,4 @@
   authorized_key:
     user: "{{ user_id }}"
     state: present
-    key: ~/.ssh/id_rsa.pub
+    key: "{{home_dir}}/.ssh/id_rsa.pub"
