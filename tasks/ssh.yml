@@ -23,7 +23,8 @@
   command: "cat {{ home_dir }}/.ssh/id_rsa.pub"
   register: key
 - name: Set authorized key took from file
+  become: no
   authorized_key:
     user: "{{ user_id }}"
     state: present
-    key: "{{ home_dir }}/.ssh/id_rsa.pub"
+    key: ~/.ssh/id_rsa.pub
