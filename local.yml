@@ -2,8 +2,8 @@
   become: true
   vars:
     source_key: "./.ssh/id_rsa"
-    home_dir: "{{ lookup('env', 'HOME') }}"
-    user_id: "{{ lookup('env', 'USER') }}"
+    home_dir: "/home/scott"
+    user_id: "scott"
     dest_key: "{{ home_dir }}/.ssh/id_rsa"
   pre_tasks:
     - name: update repositories
