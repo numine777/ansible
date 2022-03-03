@@ -1,3 +1,8 @@
+- name: Remove neovim
+  shell: rm -rf ~/neovim
+  tags:
+    - install
+    - neovim
 - name: Clone Neovim
   ansible.builtin.git:
     repo: 'https://github.com/neovim/neovim.git'
@@ -6,11 +11,12 @@
     - install
     - neovim
 - name: Build neovim
-  shell: "cd {{ lookup('env', 'HOME') }}/neovim && make"
+  shell: "cd {{ lookup('env', 'HOME') }}/neovim && make -j 8"
   tags:
     - install
     - neovim
 - name: Install neovim
+  become: true
   shell: "cd {{ lookup('env', 'HOME') }}/neovim && make install"
   tags:
     - install
@@ -25,21 +31,9 @@
   tags:
     - install
     - neovim
-- name: Install Packer.nvim
-  shell: "git clone --depth 1 https://github.com/wbthomason/packer.nvim $/home/scott/.local/share/nvim/site/pack/packer/start/packer.nvim"
+
+- name: Install LunarVim
+  shell: LV_BRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
   tags:
     - install
-    - dotfiles
-    - neovim
-- name: Compile vim Plugins
-  shell: nvim +PackerCompile +qall +silent
-  tags:
-    - install
-    - dotfiles
-    - neovim
-- name: Install vim Plugins
-  shell: nvim +PackerInstall +qall +silent
-  tags:
-    - install
-    - dotfiles
     - neovim

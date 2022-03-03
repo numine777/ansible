@@ -1,12 +1,10 @@
 - name: OpenVPN3 repo-pkg-keyring.gpg download
-  get_url:
-    url: https://swupdate.openvpn.net/repos/openvpn-repo-pkg-key.pub
-    dest: /etc/apt/trusted.gpg.d/openvpn-repo-pkg-keyring.gpg
+  shell: curl -fsSL https://swupdate.openvpn.net/repos/openvpn-repo-pkg-key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/openvpn-repo-pkg-keyring.gpg
   tags:
     - openvpn3
     - install
 - name: OpenVPN3 PPA setting
-  shell: curl -fsSL https://swupdate.openvpn.net/community/openvpn3/repos/openvpn3-$DISTRO.list >/etc/apt/sources.list.d/openvpn3.list
+  shell: curl -fsSL https://swupdate.openvpn.net/community/openvpn3/repos/openvpn3-focal.list >/etc/apt/sources.list.d/openvpn3.list
   tags:
     - openvpn3
     - install
