@@ -26,6 +26,7 @@
     - install
     - ssh
 - name: Set authorized key took from file
+  become: no
   authorized_key:
     user: "{{ lookup('env', 'USER') }}"
     state: present
